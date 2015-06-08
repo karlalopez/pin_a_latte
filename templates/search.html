@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PinLatte</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link href="/static/css/custom.css" rel="stylesheet">
+    <link href="/static/css/navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+</head>
+
+<body class="my-body">
+    <div id="header">
+    <div class="header-container">
+    <div class='left-inner-div'>
+        <div class="left-two">
+            <div class="pin-logo logo my-button" style="cursor: pointer;" onclick="window.location='/'";>
+                <i class="fa fa-pinterest red"></i>
+            </div>
+            <form action="search" method="POST">
+
+            <div class="search-box"> <input type="text" name="term" class="search-box">
+            </div>
+        </div>
+        <div class="search-icon mag-button">
+
+            <i class="fa fa-search"><input type="submit"></i>
+        </div>
+    </div>
+
+
+    <div class='right-stuff'>
+        <div class='right-box-1'>
+            <div class="nav-avatar">
+                <img src="static/images/woman_glasses.jpg">
+            </div>
+        </div>
+        <div class='right-box-2'>{{ name }}</div>
+        <div class='right-box-3'>
+            <i class="fa fa-comment">
+                <span class="num-notifications">3</span>
+            </i>
+
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="grid-container start-images">
+        <div class="row my-row">
+          <div class="col-5">
+
+
+            <!-- loop to get pins filtered on flask app -->
+            {% for pin in pins %}
+            <div class='my-card'>
+              <img class="my-image" src="{{ pin.image }}">
+              <div class="my-caption"><p class="p-textbox">{{ pin.caption }}</p></div>
+              <div class="my-avatar"><img src="{{ pin.avatar }}"></div>
+              <div class="profile-notes">
+                  <p class="user-name">{{ pin.name }}</p>
+                  <p class="p-board-category">{{ pin.category }}</p>
+              </div>
+            </div>
+            {% endfor %}
+            <!-- end of loop to get pins filtered on flask app -->
+
+          </div>
+        </div>
+    </div>
+
+</body>
+</html>

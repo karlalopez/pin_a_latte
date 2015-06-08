@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PinLatte</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link href="/static/css/custom.css" rel="stylesheet">
+    <link href="/static/css/navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+</head>
+
+<body class="my-body">
+    <div id="header">
+    <div class="header-container">
+    <div class='left-inner-div'>
+        <div class="left-two">
+          <div class="pin-logo logo my-button" style="cursor: pointer;" onclick="window.location='/'";>
+                <i class="fa fa-pinterest red"></i>
+            </div>
+            <form action="search" method="POST">
+
+            <div class="search-box"> <input type="text" name="term" class="search-box">
+            </div>
+        </div>
+        <div class="search-icon mag-button">
+
+            <i class="fa fa-search"><input type="submit"></i>
+        </div>
+    </div>
+
+
+    <div class='right-stuff'>
+        <div class='right-box-1'>
+            <div class="nav-avatar">
+                <img src="static/images/woman_glasses.jpg">
+            </div>
+        </div>
+        <div class='right-box-2'>{{ name }}</div>
+        <div class='right-box-3'>
+            <i class="fa fa-comment">
+                <span class="num-notifications">3</span>
+            </i>
+
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="grid-container start-images">
+        <div class="row my-row">
+          <div class="col-5">
+            <!-- loop to filter pins in the template
+            {% for pin in pins %}
+
+              {% if (pin["name"].lower()).startswith(name) and name !="guest" %}
+                <div class='my-card'>
+                  <img class="my-image" src="{{ pin.image }}">
+                  <div class="my-caption"><p class="p-textbox">{{ pin.caption }}</p></div>
+                  <div class="my-avatar"><img src="{{ pin.avatar }}"></div>
+                  <div class="profile-notes">
+                      <p class="user-name">{{ pin.name }}</p>
+                      <p class="p-board-category">{{ pin.category }}</p>
+                  </div>
+                </div>
+              {% elif name =="guest" %}
+                  <div class='my-card'>
+                    <img class="my-image" src="{{ pin.image }}">
+                    <div class="my-caption"><p class="p-textbox">{{ pin.caption }}</p></div>
+                    <div class="my-avatar"><img src="{{ pin.avatar }}"></div>
+                    <div class="profile-notes">
+                        <p class="user-name">{{ pin.name }}</p>
+                        <p class="p-board-category">{{ pin.category }}</p>
+                    </div>
+                  </div>
+              {% endif %}
+
+            {% endfor %}
+            <!-- end of the loop to filter pins in the template -->
+
+            <!-- loop to get pins filtered on flask app -->
+            {% for pin in pins %}
+            <div class='my-card'>
+              <img class="my-image" src="{{ pin.image }}">
+              <div class="my-caption"><p class="p-textbox">{{ pin.caption }}</p></div>
+              <div class="my-avatar"><img src="{{ pin.avatar }}"></div>
+              <div class="profile-notes">
+                  <p class="user-name">{{ pin.name }}</p>
+                  <p class="p-board-category">{{ pin.category }}</p>
+              </div>
+            </div>
+            {% endfor %}
+            <!-- end of the loop to get pins filtered on flask app -->
+
+
+
+
+            <!-- original template
+            <div class='my-card'>
+             <img class="my-image"
+                    src="static/images/heart_2.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">I 'heart' coffee</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/red_hair.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Silvia Moon</p>
+                    <p class="p-board-category">Latte Love</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/paws.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">Paws</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/android_boy.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Dwayne Stewart</p>
+                    <p class="p-board-category">Latte Art</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/pretty.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">Is this a swan? Whatever - it's pretty!</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_italy.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Nuria Cohen</p>
+                    <p class="p-board-category">Love My Latte</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/many_cups.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">So much awesomeness here</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/bearded_man.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Bradley Kaston</p>
+                    <p class="p-board-category">Go Latte</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/charlie_brown.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">Aww! Charlie and Snoopy </p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_glasses.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Steph Johnson</p>
+                    <p class="p-board-category">Cool Lattes</p>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-5">
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/3_cartoon.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">This is so cool</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_jacket.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Jamie Jones</p>
+                    <p class="p-board-category">Coffee Time</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/maggie_cat.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">Kitty! Look at that detail.</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_giggles.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Vicky Jackson</p>
+                    <p class="p-board-category">Wake Me Up</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/paris.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">Coffee in Parie</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/red_hair.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Silvia Moon</p>
+                    <p class="p-board-category">Latte Love</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/vegan_chai.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">Yum, Yum, Yum</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/android_boy.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Dwayne Stewart</p>
+                    <p class="p-board-category">Latte Art</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/saturn.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">Space lovin latte</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_italy.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Nuria Cohen</p>
+                    <p class="p-board-category">Love My Latte</p>
+                </div>
+            </div>
+
+          </div>
+          <div class="col-5">
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/baby_feet.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">And baby makes three</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_glasses.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Steph Johnson</p>
+                    <p class="p-board-category">Cool Lattes</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/white_russian.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">mmm White Russian</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/bearded_man.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Bradley Kaston</p>
+                    <p class="p-board-category">Go Latte</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/types_of.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">a coffee for everyone</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_giggles.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Vicky Jackson</p>
+                    <p class="p-board-category">Wake Me Up</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/snowman.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">I love coffee in the winter!</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_jacket.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Jamie Jones</p>
+                    <p class="p-board-category">Coffee Time</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/to_go.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">So pretty!</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_giggles.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Vicky Jackson</p>
+                    <p class="p-board-category">Wake Me Up</p>
+                </div>
+            </div>
+
+          </div>
+          <div class="col-5">
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/cat.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">it's Caturday!</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/bearded_man.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Bradley Kaston</p>
+                    <p class="p-board-category">Go Latte</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/london.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">rainy day, book and latte</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/bearded_man.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Bradley Kaston</p>
+                    <p class="p-board-category">Go Latte</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/matcha_bunny.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">it's a green bunny</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_glasses.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Steph Johnson</p>
+                    <p class="p-board-category">Cool Lattes</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/pouring_latte.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">pouring the perfect latte</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/red_hair.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Silvia Moon</p>
+                    <p class="p-board-category">Latte Love</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/snoopy.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">Joe cool in my jo</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_giggles.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Vicky Jackson </p>
+                    <p class="p-board-category">Wake Me Up</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/mugs_on_wood.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">this picture makes me so happy</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/anna_smiles.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Anna Kurcher</p>
+                    <p class="p-board-category">Latte me</p>
+                </div>
+            </div>
+
+          </div>
+          <div class="col-5">
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/monkey.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">this monkey is awesome</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/red_hair.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Silvia Moon</p>
+                    <p class="p-board-category">Latte Love</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/red_mug.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">a perfect saturday</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/bearded_man.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Bradley Kaston</p>
+                    <p class="p-board-category">Go Latte</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/heart.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">I love coffee</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/android_boy.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Dwayne Stewart</p>
+                    <p class="p-board-category">Latte Art</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/turkish_mug.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">Turkish coffee</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_glasses.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Steph Johnson</p>
+                    <p class="p-board-category">Cool Lattes</p>
+                </div>
+            </div>
+
+            <div class='my-card'>
+                <img class="my-image"
+                    src="static/images/ghost.jpg">
+                <div class="my-caption">
+                    <p class="p-textbox">BOO</p>
+                </div>
+                <div class="my-avatar">
+                    <img src="static/images/woman_jacket.jpg">
+                </div>
+                <div class="profile-notes">
+                    <p class="user-name">Jamie Jones</p>
+                    <p class="p-board-category">Coffee Time</p>
+                </div>
+            </div>
+            end of the original template -->
+
+          </div>
+        </div>
+    </div>
+
+</body>
+</html>
